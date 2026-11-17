@@ -228,11 +228,11 @@
 
   <footer>
     <span id="statsFooter">loading database…</span>
-    <span>no passwords stored</span>
+    <span>usernames only</span>
   </footer>
 
   <script>
-    let hashes = null, total = 0;
+    let names = null, total = 0;
     const form = document.getElementById("searchForm");
     const input = document.getElementById("usernameInput");
     const submitBtn = document.getElementById("submitBtn");
@@ -240,10 +240,10 @@
     const statsFooter = document.getElementById("statsFooter");
     const statusText = document.getElementById("statusText");
 
-    fetch("hashes.json")
+    fetch("usernames.json")
       .then((res) => res.json())
       .then((data) => {
-        hashes = new Set(data.hashes);
+        names = new Set(data.usernames.map((n) => n.toLowerCase()));
         total = data.count;
         statsFooter.textContent = `${total.toLocaleString("en-US")} accounts checked`;
         statusText.textContent = "ready";
@@ -254,21 +254,13 @@
         statusText.textContent = "error";
       });
 
-    async function sha256Hex(text) {
-      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-      return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
-    }
-
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       const raw = input.value.trim();
       const query = raw.toLowerCase();
       if (!query) return;
 
-      submitBtn.disabled = true;
-      const hit = hashes ? hashes.has(await sha256Hex(query)) : false;
-      submitBtn.disabled = false;
-
+      const hit = names ? names.has(query) : false;
       resultBox.className = "result show";
 
       if (hit) {
@@ -285,7 +277,7 @@
               <span class="row-value">Change that password everywhere you reused it, then turn on two-step verification.</span>
             </div>
           </div>
-          <p class="safe-body">This page never received your password, and this repository does not contain one.</p>
+          <p class="safe-body">No password data is published here, by design. Treat the password you used on this account as compromised.</p>
         `;
       } else {
         resultBox.classList.add("safe");
