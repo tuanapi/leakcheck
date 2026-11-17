@@ -204,9 +204,9 @@
     <div class="wrap">
       <p class="index">01 — Lookup</p>
       <h1>Has your<br />account been<br />hacked?</h1>
-      <p class="subtitle">
+      <p class="subtitle" id="subtitleText">
         Enter your username to check whether it appears in the leaked database.
-        This list holds hashed usernames only — no passwords are present anywhere in this repository.
+        This list holds usernames only — no password data is published here.
       </p>
 
       <form id="searchForm" autocomplete="off">
@@ -228,7 +228,7 @@
 
   <footer>
     <span id="statsFooter">loading database…</span>
-    <span>usernames only</span>
+    <span id="footerNote">usernames only</span>
   </footer>
 
   <script>

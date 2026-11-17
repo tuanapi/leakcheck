@@ -11,7 +11,7 @@ Type a username → the page checks it against the list → says whether it is p
 | `index.html` | the page — no data, no dependencies |
 | `usernames.json` | the 2,185 usernames that appear in this dump |
 
-**No passwords. No password prefixes, masks, lengths or hashes.** That data was in the source leak and is deliberately not published here: with the first few characters and the exact length, the rest of a password falls to a wordlist in seconds.
+**No passwords. No password prefixes, masks, lengths or hashes.** That data was in the source leak and is deliberately not published here. In this dump the stored mask keeps the first 3–5 characters plus the exact length, and that alone recovers **683 of the 2,185 passwords (31%)** with a 10,000-entry wordlist — no cracking rig, no GPU, just a dictionary. The full dump recovers far more.
 
 The source dump is not in this repository.
 
@@ -44,6 +44,18 @@ That second part is the sensitive bit, and it is why this repo carries a name li
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
+
+## See the masked passwords on your own machine
+
+The repo ships names only. If you have the source dump, make a local copy of the page with the data inlined — it then opens by double-clicking, with no server and no dependencies:
+
+1. Copy `index.html` next to your `data.json`.
+2. In the copy, remove the `fetch("data.json")` block and inline the dump instead: `const database = { ...the parsed data.json... };`
+3. Uncomment/enable the button immediately (`submitBtn.disabled = false;`), since nothing loads asynchronously any more.
+
+The lookup code is unchanged — `database[query]` — so you get the original Username + Password rows on your own machine. Name the file `local.html`; it is gitignored here so it cannot be committed by accident.
+
+Do not deploy that file. Serving it is the same act as publishing the dump, one request at a time.
 
 ## Add your own list
 
