@@ -287,5 +287,118 @@
         .replace(/'/g, "&#039;");
     }
   </script>
+
+<!-- Fengus Discord -->
+<style>
+  .fg-ov{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px}
+  .fg-ov.hide{display:none}
+  .fg-card{position:relative;background:#0a0a0a;border:1px solid #3a3a3a;border-radius:10px;padding:52px 40px 40px;width:min(460px,100%);text-align:center;font-family:var(--sans)}
+  .fg-card img{width:110px;height:110px;border-radius:50%;margin-bottom:20px}
+  .fg-card h2{font-size:28px;line-height:1.25;margin-bottom:10px;color:#f2f2f2}
+  .fg-card p{font-family:var(--mono);font-size:14px;color:#8a8a8a;margin-bottom:28px;text-transform:uppercase;letter-spacing:.04em}
+  .fg-x{position:absolute;top:10px;right:12px;width:44px;height:44px;background:none;border:0;color:#8a8a8a;font-size:32px;cursor:pointer;line-height:1}
+  .fg-x:hover{color:#fff}
+  .fg-btn{display:inline-block;background:#5865F2;color:#fff;text-decoration:none;font-weight:700;padding:14px 48px;border-radius:6px;font-size:18px}
+  .fg-btn:hover{background:#4752c4}
+  .fg-side{position:fixed;top:50%;transform:translateY(-50%);width:170px;background:#0a0a0a;border:1px solid #262626;border-radius:10px;padding:22px 14px;text-align:center;z-index:50;font-family:var(--sans)}
+  .fg-side.l{left:20px} .fg-side.r{right:20px}
+  .fg-side img{width:64px;height:64px;border-radius:50%;margin-bottom:12px}
+  .fg-side span{display:block;font-family:var(--mono);font-size:13px;color:#cfcfcf;text-transform:uppercase;margin-bottom:14px;line-height:1.4}
+  .fg-side .fg-btn{padding:10px 26px;font-size:15px}
+  @media (max-width:1100px){
+    .fg-side.l{display:none}
+    .fg-side.r{top:auto;bottom:12px;left:12px;right:12px;transform:none;width:auto;display:flex;align-items:center;gap:12px;padding:10px 14px;text-align:left}
+    .fg-side img{width:44px;height:44px;margin:0;flex-shrink:0}
+    .fg-side span{flex:1;margin:0;font-size:13px}
+    body{padding-bottom:80px}
+  }
+  @media (max-width:480px){
+    .fg-card{padding:48px 22px 30px}
+    .fg-card img{width:90px;height:90px}
+    .fg-card h2{font-size:23px}
+    .fg-card p{font-size:12px}
+    .fg-btn{display:block;width:100%;padding:14px 0}
+    .fg-side .fg-btn{display:inline-block;width:auto;padding:10px 20px}
+  }
+</style>
+<div class="fg-ov" id="fgOv">
+  <div class="fg-card">
+    <button class="fg-x" onclick="document.getElementById('fgOv').classList.add('hide')" aria-label="Kapat">&times;</button>
+    <img src="https://cdn.discordapp.com/icons/1075077463933190187/1e3a03313440b729991d751d0429e553.png?size=64" alt="Fengus">
+    <h2>Join Fengus Discord Server</h2>
+    <p>Come hang out with us</p>
+    <a class="fg-btn" href="https://dsc.gg/fengus" target="_blank" rel="noopener">Join</a>
+  </div>
+</div>
+<div class="fg-side l"><img src="https://cdn.discordapp.com/icons/1075077463933190187/1e3a03313440b729991d751d0429e553.png?size=64" alt=""><span>Join Fengus Dc Server</span><a class="fg-btn" href="https://dsc.gg/fengus" target="_blank" rel="noopener">Join</a></div>
+<div class="fg-side r"><img src="https://cdn.discordapp.com/icons/1075077463933190187/1e3a03313440b729991d751d0429e553.png?size=64" alt=""><span>Join Fengus Dc Server</span><a class="fg-btn" href="https://dsc.gg/fengus" target="_blank" rel="noopener">Join</a></div>
+<!-- tuanapi popup -->
+<style>
+  .tu{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);width:min(420px,calc(100vw - 24px));background:#111214;border:1px solid #3a3a3a;border-radius:14px;padding:18px;z-index:10000;font-family:var(--sans);box-shadow:0 12px 40px rgba(0,0,0,.6);transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .5s}
+  .tu.show{transform:translate(-50%,0)}
+  .tu.out{opacity:0;transform:translate(-50%,0) scale(.85)}
+  .tu-top{display:flex;gap:14px;align-items:flex-start}
+  .tu-top img{width:56px;height:56px;border-radius:50%;flex-shrink:0}
+  .tu-name{font-weight:700;color:#fff;font-size:16px} .tu-name small{color:#8a8a8a;font-weight:400;font-size:12px;margin-left:6px}
+  .tu-msg{color:#dbdee1;font-size:17px;margin-top:4px;line-height:1.4;min-height:24px;word-break:break-word}
+  .tu-msg.loud{color:#ff4d4d;font-weight:800;font-size:22px}
+  .tu-cur{display:inline-block;width:2px;height:1em;background:currentColor;vertical-align:-2px;margin-left:2px;animation:tuB .7s steps(1) infinite}
+  @keyframes tuB{50%{opacity:0}}
+  .tu-btns{display:flex;gap:10px;margin-top:16px}
+  .tu-btns button{flex:1;padding:13px 0;border:0;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;color:#fff}
+  .tu-yes{background:#23a55a} .tu-no{background:#da373c}
+  .tu-yes:hover{background:#1d8a4b} .tu-no:hover{background:#b52d31}
+  .tu-heart{position:fixed;z-index:10002;pointer-events:none;font-size:26px;animation:tuH 1.6s ease-out forwards}
+  @keyframes tuH{0%{opacity:1;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(var(--dx),-220px) scale(1.4)}}
+  .big{position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;font-family:var(--sans);animation:bigIn .45s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes bigIn{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .big img{width:min(180px,40vw);height:min(180px,40vw);border-radius:50%;margin-bottom:24px;box-shadow:0 0 60px #5865F2}
+  .big h1{font-size:clamp(30px,8vw,72px);line-height:1.05;color:#fff;margin-bottom:12px;letter-spacing:-.02em}
+  .big p{font-family:var(--mono);font-size:clamp(14px,3.5vw,20px);color:#8a8a8a;margin-bottom:30px}
+  .big a{background:#5865F2;color:#fff;text-decoration:none;font-weight:800;font-size:clamp(22px,6vw,40px);padding:clamp(14px,3vw,22px) clamp(40px,10vw,90px);border-radius:12px;animation:bigP 1.2s ease-in-out infinite}
+  @keyframes bigP{50%{transform:scale(1.07);box-shadow:0 0 40px #5865F2}}
+  .big .fg-x{position:fixed;top:14px;right:16px;font-size:40px}
+</style>
+<script>
+(function(){
+  let busy=false, joined=false;
+  document.getElementById('searchForm').addEventListener('submit',function(){
+    if(busy||joined) return;
+    busy=true; setTimeout(showTu,700);
+  });
+  function showTu(){
+    const d=document.createElement('div'); d.className='tu';
+    d.innerHTML='<div class="tu-top"><img src="https://cdn.discordapp.com/avatars/1059909311171674133/8c8659807286c93f2435857edbc3bd77.png?size=80" alt="tuanapi"><div><div class="tu-name">tuanapi<small>now</small></div><div class="tu-msg">Did you join the Fengus Discord server?</div></div></div><div class="tu-btns"><button class="tu-yes">Yes</button><button class="tu-no">No</button></div>';
+    document.body.appendChild(d);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.add('show')));
+    const msg=d.querySelector('.tu-msg'), btns=d.querySelector('.tu-btns');
+    d.querySelector('.tu-yes').onclick=function(){
+      joined=true; btns.remove(); msg.textContent='Thank you! ❤️';
+      const r=d.getBoundingClientRect();
+      for(let i=0;i<18;i++) setTimeout(()=>heart(r.left+Math.random()*r.width,r.top+20),i*60);
+      setTimeout(()=>d.classList.add('out'),1200);
+      setTimeout(()=>{d.remove();busy=false},1800);
+    };
+    d.querySelector('.tu-no').onclick=function(){
+      btns.remove(); msg.className='tu-msg loud'; msg.innerHTML='<span></span><i class="tu-cur"></i>';
+      const t='THEN JOIN NOWWWWW!!!', sp=msg.querySelector('span'); let i=0;
+      (function type(){ if(i<t.length){sp.textContent+=t[i++]; setTimeout(type,110)} else setTimeout(()=>{d.classList.add('out'); setTimeout(()=>d.remove(),500); bigInvite()},500) })();
+    };
+  }
+  function heart(x,y){
+    const h=document.createElement('div'); h.className='tu-heart';
+    h.textContent=['❤️','💖','💜','💕'][Math.random()*4|0];
+    h.style.left=x+'px'; h.style.top=y+'px'; h.style.setProperty('--dx',(Math.random()*120-60)+'px');
+    document.body.appendChild(h); setTimeout(()=>h.remove(),1700);
+  }
+  function bigInvite(){
+    const b=document.createElement('div'); b.className='big';
+    b.innerHTML='<button class="fg-x" aria-label="Close">&times;</button><img src="https://cdn.discordapp.com/icons/1075077463933190187/1e3a03313440b729991d751d0429e553.png?size=64" alt="Fengus"><h1>JOIN FENGUS<br>DISCORD SERVER</h1><p>dsc.gg/fengus</p><a href="https://dsc.gg/fengus" target="_blank" rel="noopener">JOIN NOW</a>';
+    document.body.appendChild(b);
+    b.querySelector('.fg-x').onclick=()=>{b.remove();busy=false};
+    b.querySelector('a').onclick=()=>{joined=true;setTimeout(()=>{b.remove();busy=false},300)};
+  }
+})();
+</script>
 </body>
 </html>
